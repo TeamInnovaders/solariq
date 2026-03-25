@@ -212,6 +212,7 @@ export default function SolarCalc() {
 
   return (
     <div style={S.page}>
+      <style>{`html, body, #root { margin: 0; padding: 0; background: #0c1117; min-height: 100vh; }`}</style>
       <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
       <div style={S.wrap}>
 
@@ -222,7 +223,7 @@ export default function SolarCalc() {
             <span style={{ fontSize: 24, fontWeight: 800, letterSpacing: "-0.03em" }}>Solar<span style={{ color: S.sun }}>IQ</span></span>
           </div>
           <p style={{ color: S.muted, fontSize: 14, margin: 0, fontWeight: 500 }}>See if solar makes sense for your home</p>
-          <p style={{ color: S.dimmed, fontSize: 12, margin: "4px 0 0", fontWeight: 500 }}>Updated for 2026 tax law changes \u00b7 Maryland data</p>
+          <p style={{ color: S.dimmed, fontSize: 12, margin: "4px 0 0", fontWeight: 500 }}>Updated for 2026 tax law changes · Maryland data</p>
         </div>
 
         {/* 2026 Alert Banner */}
@@ -253,11 +254,11 @@ export default function SolarCalc() {
         {/* System Recommendation */}
         <div style={S.card}>
           <div style={{ fontSize: 12, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", color: S.muted, marginBottom: 12 }}>Your Recommended System</div>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", gap: 6 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
             <Stat label="System Size" value={`${systemSizeKw} kW`} color={S.sun} big />
             <Stat label="Panels" value={`${numPanels}`} color="#e8ecf1" sub="400W each" big />
-            <Stat label="Annual Output" value={`${(annualProductionKwh/1000).toFixed(1)}K`} color={S.green} sub="kWh/year" big />
-            <Stat label="Offset" value={`${Math.min(100, Math.round(annualProductionKwh / annualUsageKwh * 100))}%`} color={S.green} sub="of usage" big />
+            <Stat label="Annual Output" value={`${(annualProductionKwh/1000).toFixed(1)}K kWh`} color={S.green} sub="per year" big />
+            <Stat label="Offset" value={`${Math.min(100, Math.round(annualProductionKwh / annualUsageKwh * 100))}%`} color={S.green} sub="of your usage" big />
           </div>
         </div>
 
