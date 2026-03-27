@@ -203,10 +203,22 @@ export default function SolarCalc() {
   const year1PpaCost = annualProductionKwh * DEFAULTS.ppaRate;
   const year1PpaSavings = year1ElecSavings - year1PpaCost;
 
-  const handleLeadSubmit = () => {
-    if (leadName && leadEmail.includes("@") && leadPhone.length >= 10) {
+  const handleLeadSubmit = async () => {
+    if (!leadName || !leadEmail.includes("@") || leadPhone.length < 10) return;
+    try {
+      const formData = new FormData();
+      formData.append("fields[email]", leadEmail);
+      formData.append("fields[name]", leadName);
+      formData.append("fields[phone]", leadPhone);
+      formData.append("fields[company]", "Bill: $" + monthlyBill + " | System: " + systemSizeKw + "kW");
+      await fetch("https://assets.mailerlite.com/jsonp/2225662/forms/183075614768498369/subscribe", {
+        method: "POST",
+        body: formData,
+        mode: "no-cors",
+      });
       setLeadSubmitted(true);
-      // In production: POST to your backend/CRM/SunRun referral form
+    } catch (e) {
+      setLeadSubmitted(true);
     }
   };
 
